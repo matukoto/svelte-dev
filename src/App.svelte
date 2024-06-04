@@ -5,6 +5,7 @@
   let name = 'Svelte'
   let imageUrl = 'https://github.com/svelte-book/sample-app/blob/main/static/react-book-1.png'
   let altText = 'Svelte logo'
+  let disabled = true
 </script>
 
 <main>
@@ -17,6 +18,7 @@
     </a>
   </div>
   <h1>Vite + Svelte</h1>
+  <button {disabled}>送信</button>
 
   <div class="card">
     <Counter />

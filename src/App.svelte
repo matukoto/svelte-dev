@@ -2,6 +2,7 @@
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
+  let name = 'Svelte'
 </script>
 
 <main>
@@ -18,9 +19,7 @@
   <div class="card">
     <Counter />
   </div>
-  <div>
-    現在の時刻は {new Date()} です
-  </div>
+  <div> Hello {name}</div>
 
   <p>
     Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!

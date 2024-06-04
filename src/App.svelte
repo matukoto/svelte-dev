@@ -3,6 +3,8 @@
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
   let name = 'Svelte'
+  let imageUrl = 'https://github.com/svelte-book/sample-app/blob/main/static/react-book-1.png'
+  let altText = 'Svelte logo'
 </script>
 
 <main>
@@ -20,7 +22,7 @@
     <Counter />
   </div>
   <div> Hello {name}</div>
-
+  <img src={imageUrl} alt={altText}>
   <p>
     Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
   </p>

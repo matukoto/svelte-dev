@@ -1,21 +1,13 @@
 <script>
 	let n = 1;
-	let stars;
-
-	// 関数呼び出し
-	$: console.log('n が ${n} に更新された');
-	// 複数の文を書くにはブロックに
-	$: {
-		const newStars = [];
-		for (let i = 0; i < n; i++) {
-			newStars.push(i % 2 === 0 ? '☆' : '');
-		}
-		stars = newStars;
+	$: if (n > 10) {
+		alert('多すぎ。10以内にして');
+		n = 10;
 	}
 </script>
 
 <div>
-	{#each stars as star}{star}{/each}
+	数量: {n}
 </div>
 <div>
 	<button on:click={() => (n = n - 1)} disabled={n <= 1}> ☆を減らす </button>

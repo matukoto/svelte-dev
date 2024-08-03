@@ -1,13 +1,13 @@
 <script>
-	import src from './assets/svelte.svg';
-	import Counter from './lib/Counter.svelte';
 	let count = 0;
-	function increment() {
+	$: doubled = count * 2;
+	const increment = () => {
 		count += 1;
-	}
+	};
 </script>
 
 <button on:click={increment}>
-	Clicked {count}
-	{count == 1 ? 'time' : 'times'}
+	count is {count}
 </button>
+
+<p>{count} doubled is {doubled}</p>

@@ -1,7 +1,13 @@
 <script>
 	import src from './assets/svelte.svg';
 	import Counter from './lib/Counter.svelte';
-	let name = 'Svelte';
+	let count = 0;
+	function increment() {
+		count += 1;
+	}
 </script>
 
-<p>{@html name}</p>
+<button on:click={increment}>
+	Clicked {count}
+	{count == 1 ? 'time' : 'times'}
+</button>

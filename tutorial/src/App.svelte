@@ -1,20 +1,18 @@
 <script>
-	import Thing from './lib/Thing.svelte';
+	import { getRandomNumber } from './lib/utils.js';
 
-	let things = [
-		{ id: 1, name: 'apple' },
-		{ id: 2, name: 'banana' },
-		{ id: 3, name: 'carrot' },
-		{ id: 4, name: 'doughnut' },
-		{ id: 5, name: 'egg' }
-	];
-
+	let promise = getRandomNumber();
 	function handleClick() {
-		things = things.slice(1);
+		promise = getRandomNumber();
 	}
 </script>
 
-<button on:click={handleClick}> Remove first thing</button>
-{#each things as thing (thing.id)}
-	<Thing name={thing.name} />
-{/each}
+<button on:click={handleClick}> generate random number</button>
+
+{#await promise}
+	<p>...waiting</p>
+{:then number}
+	<p>the number is {number}</p>
+{:catch error}
+	<p style="color: red">{error.message}</p>
+{/await}

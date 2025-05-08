@@ -1,39 +1,36 @@
-import js from '@eslint/js';
-import { includeIgnoreFile } from '@eslint/compat';
-import svelte from 'eslint-plugin-svelte';
-import globals from 'globals';
-import { fileURLToPath } from 'node:url';
-import ts from 'typescript-eslint';
-import svelteConfig from './svelte.config.js';
+import antfu from '@antfu/eslint-config';
+import gitignore from 'eslint-config-flat-gitignore';
 
-const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
-
-export default ts.config(
-	includeIgnoreFile(gitignorePath),
-	js.configs.recommended,
-	...ts.configs.recommended,
-	...svelte.configs.recommended,
+export default antfu(
 	{
-		languageOptions: {
-			globals: { ...globals.browser, ...globals.node }
+		formatters: true,
+
+		/** general rules */
+		rules: {
+			'eqeqeq': ['error', 'always', { null: 'ignore' }],
+			'no-unexpected-multiline': 'error',
+			'no-unreachable': 'error',
 		},
-		rules: { // typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
-		// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
-		"no-undef": 'off' }
+
+		stylistic: {
+			indent: 'tab',
+			quotes: 'single',
+			semi: true,
+		},
+		typescript: true,
+		yaml: true,
+		markdown: true,
+
+		svelte: {
+			overrides: {
+				'svelte/indent': [
+					'error',
+					{ indent: 'tab', alignAttributesVertically: true },
+				],
+				'svelte/html-self-closing': ['error', 'all'],
+				'svelte/sort-attributes': 'error',
+			},
+		},
 	},
-	{
-		files: [
-			'**/*.svelte',
-			'**/*.svelte.ts',
-			'**/*.svelte.js'
-		],
-		languageOptions: {
-			parserOptions: {
-				projectService: true,
-				extraFileExtensions: ['.svelte'],
-				parser: ts.parser,
-				svelteConfig
-			}
-		}
-	}
+	gitignore(),
 );
